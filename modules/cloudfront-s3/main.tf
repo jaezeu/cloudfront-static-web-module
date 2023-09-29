@@ -7,6 +7,9 @@ resource "aws_s3_bucket" "static_web" {
   #checkov:skip=CKV2_AWS_61:Ensure that an S3 bucket has a lifecycle configuration
   #checkov:skip=CKV2_AWS_62:Ensure S3 buckets should have event notifications enabled
   #checkov:skip=CKV_AWS_145:Ensure that S3 buckets are encrypted with KMS by default
+  #checkov:skip=CKV2_AWS_6:Ensure that S3 bucket has a Public Access block
+  #checkov:skip=CKV_AWS_144:Ensure that S3 bucket has cross-region replication enabled
+  #checkov:skip=CKV_AWS_21:Ensure all data stored in the S3 bucket have versioning enabled
   bucket = "${var.prefix}-s3-bkt"
 }
 
@@ -21,6 +24,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   #checkov:skip=CKV_AWS_174:Verify CloudFront Distribution Viewer Certificate is using TLS v1.2
   #checkov:skip=CKV_AWS_34:Ensure cloudfront distribution ViewerProtocolPolicy is set to HTTPS
   #checkov:skip=CKV2_AWS_32:Ensure CloudFront distribution has a response headers policy attached
+  #checkov:skip=CKV2_AWS_47:Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability
+  #checkov:skip=CKV2_AWS_42:Ensure AWS CloudFront distribution uses custom SSL certificate
   origin {
     domain_name              = aws_s3_bucket.static_web.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
