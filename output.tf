@@ -1,8 +1,8 @@
-output "domain" {
+output "cf_domain" {
   value = module.static_web_stack.cloudfront_domain
 }
 
-output "id" {
+output "cf_id" {
   value = module.static_web_stack.cloudfront_id
 }
 
