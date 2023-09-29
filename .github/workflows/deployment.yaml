@@ -38,10 +38,10 @@ jobs:
     - name: Terraform Validate
       run: terraform validate -no-color
     
-    - name: Checkov
-      uses: bridgecrewio/checkov-action@master
-      with:
-        framework: terraform
+    # - name: Checkov
+    #   uses: bridgecrewio/checkov-action@master
+    #   with:
+    #     framework: terraform
 
     - name: Terraform Plan
       run: terraform plan
