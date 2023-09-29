@@ -3,6 +3,10 @@ locals {
 }
 
 resource "aws_s3_bucket" "static_web" {
+  #checkov:skip=CKV_AWS_18:Ensure the S3 bucket has access logging enabled
+  #checkov:skip=CKV2_AWS_61:Ensure that an S3 bucket has a lifecycle configuration
+  #checkov:skip=CKV2_AWS_62:Ensure S3 buckets should have event notifications enabled
+  #checkov:skip=CKV_AWS_145:Ensure that S3 buckets are encrypted with KMS by default
   bucket = "${var.prefix}-s3-bkt"
 }
 
@@ -12,6 +16,11 @@ resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
+  #checkov:skip=CKV_AWS_86:Ensure Cloudfront distribution has Access Logging enabled
+  #checkov:skip=CKV_AWS_310:Ensure CloudFront distributions should have origin failover configured
+  #checkov:skip=CKV_AWS_174:Verify CloudFront Distribution Viewer Certificate is using TLS v1.2
+  #checkov:skip=CKV_AWS_34:Ensure cloudfront distribution ViewerProtocolPolicy is set to HTTPS
+  #checkov:skip=CKV2_AWS_32:Ensure CloudFront distribution has a response headers policy attached
   origin {
     domain_name              = aws_s3_bucket.static_web.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id

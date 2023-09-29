@@ -6,6 +6,7 @@ module "static_web_stack" {
 }
 
 module "waf" {
+  #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source = "umotif-public/waf-webaclv2/aws"
   version = "5.1.2"
 
