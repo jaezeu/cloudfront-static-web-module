@@ -1,12 +1,4 @@
-name: Terraform CI
-
-# on:
-#   pull_request:
-#     branches: [ "main" ]
-
-on:
-  push:
-    branches: [ "main" ]
+name: Terraform Setup
 
 env:            
   AWS_REGION: ap-southeast-1  
@@ -18,25 +10,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_wrapper: false
-
-    - name: Terraform fmt
-      run: terraform fmt --recursive
-
-    - name: Terraform Validate
-      run: terraform validate -no-color
-
-  Terraform-CD:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
+    
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -48,14 +22,8 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_wrapper: false
-
+    
     - name: Terraform Init
       run: terraform init
-
-    - name: Terraform Plan
-      run: terraform plan
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
 
     
