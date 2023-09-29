@@ -37,6 +37,12 @@ jobs:
     
     - name: Terraform Validate
       run: terraform validate -no-color
+    
+    - name: Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          framework: terraform
 
     - name: Terraform Plan
       run: terraform plan
@@ -79,7 +85,7 @@ jobs:
       working-directory: ./static-website
 
     - name: Invalidate cache
-      run: aws cloudfront create-invalidation --distribution-id ${{ steps.tfout.outputs.CF_ID }}
+      run: aws cloudfront create-invalidation --distribution-id ${{ steps.tfout.outputs.CF_ID }} --paths "/*"
 
     - name: Output cf domain
       run: echo "${{ steps.tfout.outputs.CF_DOMAIN }}"
