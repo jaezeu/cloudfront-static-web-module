@@ -4,7 +4,7 @@ module "static_web_stack" {
   prefix = local.resource_prefix
   web_acl_id = module.waf.web_acl_arn
 }
-
+#
 module "waf" {
   #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source = "umotif-public/waf-webaclv2/aws"
