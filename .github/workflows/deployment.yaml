@@ -3,6 +3,7 @@ name: Full Deployment
 # on:
 #   pull_request:
 #     branches: [ "main" ]
+#
 
 on:
   push:
