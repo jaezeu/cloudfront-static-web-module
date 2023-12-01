@@ -32,6 +32,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id                = local.origin_id
   }
 
+  aliases = var.aliases
+
   enabled             = true
   comment             = "Static Website using S3 and Cloudfront OAC"
   default_root_object = "index.html"
@@ -46,7 +48,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = var.acm_certificate_arn
   }
 
   restrictions {

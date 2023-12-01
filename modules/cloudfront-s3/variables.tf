@@ -26,3 +26,14 @@ variable "web_acl_id" {
   default = ""
   description = "Unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution."
 }
+
+variable "acm_certificate_arn" {
+  type = string
+  description = "ACM cert ARN"
+}
+
+variable "aliases" {
+  type = list
+  description = "Alternate domain names"
+  default = []
+}

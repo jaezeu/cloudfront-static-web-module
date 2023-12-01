@@ -3,6 +3,8 @@ module "static_web_stack" {
 
   prefix = local.resource_prefix
   web_acl_id = module.waf.web_acl_arn
+  acm_certificate_arn = module.acm.acm_certificate_arn
+  aliases = ["jaz-tf.sctp-sandbox.com"]
 }
 #
 module "waf" {
@@ -37,6 +39,42 @@ module "waf" {
       managed_rule_group_statement = {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
+      }
+    },
+  ]
+}
+
+module "acm" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> 4.0"
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  domain_name  = "jaz-tf.sctp-sandbox.com"
+  zone_id      = "Z00541411T1NGPV97B5C0"
+  
+  validation_method = "DNS"
+
+  subject_alternative_names = [
+    "*.jaz-tf.sctp-sandbox.com",
+  ]
+}
+
+module "records" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+  version = "~> 2.0"
+
+  zone_name = "sctp-sandbox.com"
+
+  records = [
+    {
+      name    = "jaz-tf"
+      type    = "A"
+      alias   = {
+        name    = "${module.static_web_stack.cloudfront_domain}"
+        zone_id = "Z2FDTNDATAQYW2"
       }
     },
   ]
