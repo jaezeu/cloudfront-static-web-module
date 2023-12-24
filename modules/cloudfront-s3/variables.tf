@@ -13,3 +13,8 @@ variable "aliases" {
   description = "Alternate domain names"
   default     = []
 }
+
+variable "web_acl_id" {
+  type        = string
+  description = "Web ACL arn of WAF"
+}

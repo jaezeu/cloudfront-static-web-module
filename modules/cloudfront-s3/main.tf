@@ -30,6 +30,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   aliases = var.aliases
 
+  web_acl_id = var.web_acl_id
+
   enabled             = true
   comment             = "Static Website using S3 and Cloudfront OAC in ${var.env} environment"
   default_root_object = "index.html"

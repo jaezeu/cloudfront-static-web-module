@@ -10,6 +10,17 @@ module "static_web_stack" {
   env                 = local.env
   acm_certificate_arn = module.acm.acm_certificate_arn
   aliases             = ["${local.domain_prefix}-${local.env}.${local.zone_name}"]
+  web_acl_id          = module.waf.web_acl_arn
+}
+
+module "waf" {
+  source = "../../modules/waf"
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  env = local.env
 }
 
 module "acm" {
