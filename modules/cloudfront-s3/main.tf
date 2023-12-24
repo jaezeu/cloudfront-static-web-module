@@ -6,7 +6,8 @@ resource "aws_s3_bucket" "static_web" {
   #checkov:skip=CKV2_AWS_6:Ensure that S3 bucket has a Public Access block
   #checkov:skip=CKV_AWS_144:Ensure that S3 bucket has cross-region replication enabled
   #checkov:skip=CKV_AWS_21:Ensure all data stored in the S3 bucket have versioning enabled
-  bucket = "${var.env}-jaz-spa-cf-bkt"
+  bucket        = "${var.env}-jaz-spa-cf-bkt"
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
