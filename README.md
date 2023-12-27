@@ -1,3 +1,3 @@
 ## Architecture Diagram
 
-![image](https://github.com/jaezeu/cloudfront-static-web-module/assets/48310743/2c4ed9e0-16ab-4295-a29e-b3c7f8ee066b)
+![cloudfront-s3-tfcloud drawio](https://github.com/jaezeu/cloudfront-static-web-module/assets/48310743/57639db4-c378-4706-b57c-a598b50685eb)
