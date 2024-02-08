@@ -1,7 +1,7 @@
 locals {
   env           = "nonprd"
   domain_prefix = "jaz-cloudfront"
-  zone_name     = "sctp-sandbox.com"
+  zone_name     = "sctp-sandbox.com" #
 }
 
 module "static_web_stack" {
