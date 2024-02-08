@@ -1,0 +1,18 @@
+name: Checkov
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Checkov:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Checkov
+      uses: bridgecrewio/checkov-action@master
+      with:
+        framework: terraform
